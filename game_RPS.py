@@ -1,4 +1,4 @@
-#Game Rock paper scissor 
+#Game Rock paper scissor command based
 #User should press r/R for Rock and p/P for Paper and s/S for Scissor
 import sys
 import os
@@ -37,15 +37,16 @@ while(q!="quit"):
 	print "\n--------------------------------\n"
 	print "----Rock----Paper----Scissor----\n"
 	print "--------------------------------\n"
+	#Read the player choice
 	print "\n "+name1+" should press \nr/R for Rock \np/P for Paper \ns/S for Scissor: "
 	ply1=raw_input()
 	ply1=ply1[0].capitalize()
-	#raw_input("Enter any key")
 	print "\n "+name2+" should press \nr/R for Rock \np/P for Paper \ns/S for Scissor: "
 	ply2=raw_input()
 	ply2=ply2[0].capitalize()
+	#display the both player choice
 	display()
-	#Logic for comparing the player 1 choice with player 2
+	#Logic for comparing the player 1 choice with player 2 and announce the result
 	if ply1=='R' or ply1 == 'P' or ply1== 'S':
 		if ply2=='R' or ply2 == 'P' or ply2== 'S':
 			if ply1=='R':
@@ -75,8 +76,11 @@ while(q!="quit"):
 			print "\n Ohh!! somebody used wrong sign!! Try again"
 	else:
 		print "\n Ohh!! somebody used wrong sign!! Try again"
+
+	#This is used for menu at the end of exec, for user to choose
 	q=raw_input("\n Type \"quit\" to exit \
 			\n Type \"rename\" to change player names \
 			\n press any  key to play again:::: ")
+	#To rename the players, if not changed the previous names are used
 	if q == "rename":
 		rename()
