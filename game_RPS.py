@@ -39,7 +39,7 @@ while(q!="quit"):
 	print "\n--------------------------------\n"
 	print "----Rock----Paper----Scissor----\n"
 	print "--------------------------------\n"
-	#Read the player choice
+	#Read the player choice and capitalize the chatacter
 	print "\n "+name1+" should press \nr/R for Rock \np/P for Paper \ns/S for Scissor: "
 	ply1=raw_input()
 	ply1=ply1[0].capitalize()
