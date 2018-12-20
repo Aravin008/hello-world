@@ -1,5 +1,6 @@
 #Game Rock paper scissor command based
 #User should press r/R for Rock and p/P for Paper and s/S for Scissor
+#Yet to add GUI
 import sys
 import os
 #from Tkinter import *
