@@ -2,6 +2,7 @@
 #User should press r/R for Rock and p/P for Paper and s/S for Scissor
 import sys
 import os
+#from Tkinter import *
 
 q=""
 ply1=''
@@ -84,3 +85,9 @@ while(q!="quit"):
 	#To rename the players, if not changed the previous names are used
 	if q == "rename":
 		rename()
+
+#For GUI installed sudo apt-get install python-tk package for Tkinter GUI framawork
+import Tkinter as tk
+top = tk.Tk()
+# Code to add widgets will go here...
+top.mainloop()
