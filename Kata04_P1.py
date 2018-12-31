@@ -4,7 +4,7 @@ def readFileLines(datafile):
 	with open(datafile,'r') as rf:
 		#read each row as a line from text file
 		rows=rf.readlines()
-	print "\nrows in readFile",rows
+#	print "\nrows in readFile",rows
 	return rows
 
 def extractTable(rowsList):
@@ -14,7 +14,7 @@ def extractTable(rowsList):
 		rowncol=row.strip().replace('    ',' ').replace('   ',' ').replace('  ',' ').split(' ')
 	#append each rowncol to Table to get table with rows and columns
 		Table.append(rowncol)
-	print "\nTable:: \n",Table
+#	print "\nTable:: \n",Table
 	return Table
 
 def removestar(val):
@@ -27,11 +27,11 @@ def validate(row):
 	ncount=len(row)
 	for i,col in enumerate(row):
 		#if the row starting with numeric element then add them to table else leave them out
-		print col
+#		print col
 		if len(col)>0:
 			if i == 0:
 				if(col.isdigit()== False):
-					print "col.isdigit"
+#					print "col.isdigit"
 					return [0,row]
 				else:
 					if '*' in col:
@@ -54,7 +54,7 @@ def validate(row):
 						ncol.append(col)
 		else:
 			ncol.append(col)
-	print ("\n ncol",ncol)
+#	print ("\n ncol",ncol)
 	if len(ncol)==ncount:
 		return [1,ncol]
 
@@ -64,11 +64,11 @@ def RefineTable(Table):
 	RTable=[]
 	validateval=None
 	for row in Table:
-		print("row",row)
-		print "\n"
+#		print("row",row)
+#		print "\n"
 		if len(row)>1:
 			validateval=validate(row)
-			print ("validateval",validateval)
+#			print ("validateval",validateval)
 			if validateval[0] == 1:
 				RTable.append(validateval[1])
 	return RTable
@@ -77,24 +77,26 @@ def TempTable(Rtable):
 	TableTemp=[]
 	for row in Rtable:
 		TableTemp.append([row[0],row[1],row[2]])
-	print TableTemp
+#	print TableTemp
 	return TableTemp
 
 def findMinMonth(Table):
 	minmonth=9999
 	minmonth_idx=0
 	for row in Table:
-		print row[0],row[1],row[2],row[1]-row[2]
+#		print row[0],row[1],row[2],row[1]-row[2]
 		if(minmonth > (row[1]-row[2])):
-			minmonth_idx=row[0]
+			minmonth_idx=row[0]-1
 			minmonth=row[1]-row[2]
+#			print(minmonth_idx)
 	return [Table[minmonth_idx][0],Table[minmonth_idx][1],Table[minmonth_idx][2]]
 
+#Main block of program file-filename to supplied
 file="weather.dat"
 rowline=readFileLines(file)
 Table=extractTable(rowline)
 Rtable=RefineTable(Table)
-print Rtable					
+#print Rtable					
 TTable=TempTable(Rtable)
 MinMonth=findMinMonth(TTable)
 print "\n Month minimum spread:"+str(MinMonth[0])+" with spread "+str(MinMonth[1]-MinMonth[2])
