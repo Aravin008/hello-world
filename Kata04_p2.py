@@ -11,14 +11,14 @@ def extractTable(rowsList):
 	Table=[]
 	#split the content of line based on space
 	for row in rowsList:
-		rowncol=row.strip().replace('    ',' ').replace('   ',' ').replace('  ',' ').split(' ')
+		rowncol=row.strip().replace('-','').replace('    ',' ').replace('   ',' ').replace('  ',' ').split(' ')
 	#append each rowncol to Table to get table with rows and columns
 		Table.append(rowncol)
 #	print "\nTable:: \n",Table
 	return Table
 
 def removestar(val):
-	val=val.replace('*','')
+	val=val.replace('.','')
 	return val
 
 #The funtion to validate each row and refine the values in each column
@@ -30,11 +30,11 @@ def validate(row):
 #		print col
 		if len(col)>0:
 			if i == 0:
-				if(col.isdigit()== False):
+				if(col.replace('.','').isdigit()== False):
 #					print "col.isdigit"
 					return [0,row]
 				else:
-					if '*' in col:
+					if '.' in col:
 						col=removestar(col)
 					#else:
 					try:
@@ -42,7 +42,7 @@ def validate(row):
 					except:
 						ncol.append(float(col))
 			else:
-				if '*' in col:
+				if '.' in col:
 					col=removestar(col)
 				#else:
 				try:
@@ -76,27 +76,27 @@ def RefineTable(Table):
 def TempTable(Rtable):
 	TableTemp=[]
 	for row in Rtable:
-		TableTemp.append([row[0],row[1],row[2]])
+		TableTemp.append([row[0],row[1],row[6],row[7]])
 #	print TableTemp
 	return TableTemp
 
-def findMinMonth(Table):
-	minmonth=9999
-	minmonth_idx=0
+def findMinTeam(Table):
+	minteam=9999
+	minteam_idx=0
 	for row in Table:
 #		print row[0],row[1],row[2],row[1]-row[2]
-		if(minmonth > (row[1]-row[2])):
-			minmonth_idx=row[0]-1
-			minmonth=row[1]-row[2]
+		if(minteam > abs(row[2]-row[3])):
+			minteam_idx=row[0]-1
+			minteam=abs(row[2]-row[3])
 #			print(minmonth_idx)
-	return [Table[minmonth_idx][0],Table[minmonth_idx][1],Table[minmonth_idx][2]]
+	return [Table[minteam_idx][0],Table[minteam_idx][2],Table[minteam_idx][3]]
 
 #Main block of program file-filename to supplied
-file="weather.dat"
+file="football.dat"
 rowline=readFileLines(file)
 Table=extractTable(rowline)
 Rtable=RefineTable(Table)
 #print Rtable					
 TTable=TempTable(Rtable)
-MinMonth=findMinMonth(TTable)
-print "\nDay with minimum spread:"+str(MinMonth[0])+" has spread "+str(MinMonth[1]-MinMonth[2])
+MinTeam=findMinTeam(TTable)
+print "\nTeam with minimum difference:"+str(MinTeam[0])+" has difference "+str(abs(MinTeam[1]-MinTeam[2]))
